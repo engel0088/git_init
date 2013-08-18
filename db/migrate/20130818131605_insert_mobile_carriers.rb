@@ -1,24 +1,31 @@
 class InsertMobileCarriers < ActiveRecord::Migration
   def up
     add_column :mobile_carriers, :code, :string
-    MobileCarrier.create(:name => "Alltel Wireless", :code => "alltel")
-    MobileCarrier.create(:name => "Ameritech Cellular", :code => "ameritech")
-    MobileCarrier.create(:name => "AT&T/Cingular", :code => "at&t")
-    MobileCarrier.create(:name => "Bell South Mobility", :code => "bellsouthmobility")
-    MobileCarrier.create(:name => "Blue Sky Frog", :code => "blueskyfrog")
-    MobileCarrier.create(:name => "Boost Mobile", :code => "boost")
-    MobileCarrier.create(:name => "Cellular South", :code => "cellularsouth")
-    MobileCarrier.create(:name => "Kajeet", :code => "kajeet")
-    MobileCarrier.create(:name => "metroPCS", :code => "metropcs")
-    MobileCarrier.create(:name => "Power Tel", :code => "powertel")
-    MobileCarrier.create(:name => "PSC wireless", :code => "pscwireless")
-    MobileCarrier.create(:name => "Qwest", :code => "qwest")
-    MobileCarrier.create(:name => "Southern Link", :code => "southernlink")
-    MobileCarrier.create(:name => "Sprint Wireless", :code => "sprint")
-    MobileCarrier.create(:name => "SunCom Wireless", :code => "suncom")
-    MobileCarrier.create(:name => "T-Mobile US", :code => "t-mobile")
-    MobileCarrier.create(:name => "Virgin Mobile", :code => "virgin")
-    MobileCarrier.create(:name => "Verizon Wireless", :code => "verizon")
+
+    [{:name => "Alltel Wireless", :code => "alltel"},
+    {:name => "Ameritech Cellular", :code => "ameritech"},
+    {:name => "AT&T/Cingular", :code => "at&t"},
+    {:name => "Bell South Mobility", :code => "bellsouthmobility"},
+    {:name => "Blue Sky Frog", :code => "blueskyfrog"},
+    {:name => "Boost Mobile", :code => "boost"},
+    {:name => "Cellular South", :code => "cellularsouth"},
+    {:name => "Kajeet", :code => "kajeet"},
+    {:name => "metroPCS", :code => "metropcs"},
+    {:name => "Power Tel", :code => "powertel"},
+    {:name => "PSC wireless", :code => "pscwireless"},
+    {:name => "Qwest", :code => "qwest"},
+    {:name => "Southern Link", :code => "southernlink"},
+    {:name => "Sprint Wireless", :code => "sprint"},
+    {:name => "SunCom Wireless", :code => "suncom"},
+    {:name => "T-Mobile US", :code => "t-mobile"},
+    {:name => "Virgin Mobile", :code => "virgin"},
+    {:name => "Verizon Wireless", :code => "verizon"}].each do |mobile|
+      m=MobileCarrier.new
+      m.name = mobile[:name]
+      m.code = mobile[:code]
+      m.save
+    end
+
   end
 
   def down
