@@ -8,7 +8,9 @@ class CreateQuestionTypes < ActiveRecord::Migration
     end
 
     ["textbox", "textarea", "date", "date and time", "time", "selection in scroll list", "selection with radio buttons", "Multi-choices"].each do |type|
-       QuestionType.create(:name => type)
+       q= QuestionType.new
+       q.name = type
+       q.save
   	end
 
   end
