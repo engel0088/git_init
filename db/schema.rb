@@ -11,18 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815134809) do
+ActiveRecord::Schema.define(:version => 20130818132006) do
 
   create_table "anonymous_questionnaires", :force => true do |t|
-    t.integer  "anonymous_id"
+    t.integer  "lead_id"
     t.integer  "question_id"
-    t.integer  "response_id"
     t.string   "response_text"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "anonymous_questionnaires", ["anonymous_id"], :name => "index_anonymous_questionnaires_on_anonymous_id"
+  add_index "anonymous_questionnaires", ["lead_id"], :name => "index_anonymous_questionnaires_on_anonymous_id"
+  add_index "anonymous_questionnaires", ["lead_id"], :name => "index_anonymous_questionnaires_on_lead_id"
+  add_index "anonymous_questionnaires", ["question_id"], :name => "index_anonymous_questionnaires_on_question_id"
 
   create_table "bonuses", :force => true do |t|
     t.integer  "sales_person_id"
@@ -38,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.integer  "parent_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "permalink"
+    t.datetime "deleted_at"
   end
 
   create_table "commission_payments", :force => true do |t|
@@ -47,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
 
   create_table "contractors", :force => true do |t|
     t.integer  "user_id"
-    t.string   "login"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -72,6 +74,13 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.integer  "sales_person_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.boolean  "mobile_hide"
+    t.boolean  "address_hide"
+    t.datetime "deleted_at"
+    t.string   "other_phone"
+    t.boolean  "fax_hide"
+    t.date     "date_founded"
+    t.boolean  "email_hide"
   end
 
   add_index "contractors", ["sales_person_id"], :name => "index_contractors_on_sales_person_id"
@@ -86,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.integer  "parent_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "permalink"
   end
 
   create_table "leads", :force => true do |t|
@@ -96,8 +106,17 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.integer  "project_type_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "contractor_id"
+    t.string   "call_me"
+    t.boolean  "financing"
+    t.integer  "financer_id"
+    t.integer  "category_id"
+    t.string   "guid"
+    t.datetime "deleted_at"
+    t.integer  "state_id"
   end
 
+  add_index "leads", ["contractor_id"], :name => "index_leads_on_contractor_id"
   add_index "leads", ["project_type_id"], :name => "index_leads_on_project_type_id"
 
   create_table "memories", :force => true do |t|
@@ -112,19 +131,20 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.string  "domain"
     t.string  "email_format"
     t.integer "digits"
+    t.string  "code"
   end
 
   create_table "monopolies", :force => true do |t|
     t.integer  "zip_code_id"
-    t.integer  "project_type_id"
     t.integer  "contractor_id"
     t.date     "expiration"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "category_id"
   end
 
+  add_index "monopolies", ["category_id"], :name => "index_monopolies_on_category_id"
   add_index "monopolies", ["contractor_id"], :name => "index_monopolies_on_contractor_id"
-  add_index "monopolies", ["project_type_id"], :name => "index_monopolies_on_project_type_id"
   add_index "monopolies", ["zip_code_id"], :name => "index_monopolies_on_zip_code_id"
 
   create_table "monopoly_versions", :force => true do |t|
@@ -186,12 +206,26 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.float    "discount"
     t.float    "commission"
     t.string   "credit_card_number"
-    t.string   "credit_card_expiration"
     t.string   "credit_card_cvv"
-    t.datetime "expiration"
     t.string   "status"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "payment_method"
+    t.string   "order_type"
+    t.string   "billing_name"
+    t.string   "billing_address"
+    t.string   "billing_city"
+    t.integer  "billing_state_id"
+    t.string   "billing_zip"
+    t.integer  "credit_card_month_exp"
+    t.integer  "credit_card_year_exp"
+    t.datetime "agreement_sent_at"
+    t.string   "type"
+    t.integer  "commission_payment_id"
+    t.integer  "original_order_id"
+    t.float    "amount_total"
   end
 
   create_table "paranoids", :force => true do |t|
@@ -203,11 +237,12 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.string   "type"
     t.integer  "order_id"
     t.float    "amount"
-    t.string   "method"
+    t.string   "payment_method"
     t.string   "transaction_id"
     t.integer  "sales_person_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "cheque_number"
   end
 
   create_table "possible_responses", :force => true do |t|
@@ -225,6 +260,9 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.integer  "position"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "category_id"
+    t.string   "permalink"
+    t.datetime "deleted_at"
   end
 
   create_table "question_types", :force => true do |t|
@@ -237,15 +275,15 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
   create_table "questionnaires", :force => true do |t|
     t.string   "name"
     t.integer  "created_by"
-    t.datetime "created_at",   :null => false
+    t.datetime "created_at",      :null => false
     t.integer  "updated_by"
-    t.datetime "updated_at",   :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "lock_version"
+    t.integer  "project_type_id"
   end
 
   create_table "questions", :force => true do |t|
-    t.string   "name"
-    t.text     "text"
+    t.text     "name"
     t.integer  "position"
     t.integer  "created_by"
     t.datetime "created_at",       :null => false
@@ -254,6 +292,7 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.integer  "lock_version"
     t.integer  "questionnaire_id"
     t.integer  "question_type_id"
+    t.boolean  "flag_model"
   end
 
   add_index "questions", ["question_type_id"], :name => "index_questions_on_question_type_id"
@@ -279,14 +318,17 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.string   "address"
     t.string   "city"
     t.integer  "state_id"
-    t.string   "postal_code",       :limit => 5
-    t.string   "phone",             :limit => 15
-    t.string   "mobile",            :limit => 15
-    t.string   "fax",               :limit => 15
-    t.integer  "commission_rate"
-    t.integer  "contractors_count",               :default => 0
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.string   "postal_code",                 :limit => 5
+    t.string   "phone",                       :limit => 15
+    t.string   "mobile",                      :limit => 15
+    t.string   "fax",                         :limit => 15
+    t.integer  "commission_rate_new_account"
+    t.integer  "contractors_count",                         :default => 0
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.integer  "mobile_carrier_id"
+    t.integer  "commission_rate_reorder"
+    t.integer  "commission_rate_renewal"
   end
 
   add_index "sales_people", ["state_id"], :name => "index_sales_people_on_state_id"
@@ -315,7 +357,11 @@ ActiveRecord::Schema.define(:version => 20130815134809) do
     t.datetime "activated_at"
     t.string   "state",                                   :default => "passive"
     t.datetime "deleted_at"
+    t.string   "role",                      :limit => 20
+    t.string   "reset_code"
   end
+
+  add_index "users", ["role"], :name => "index_users_on_role"
 
   create_table "wished_monopolies", :force => true do |t|
     t.integer  "contractor_id"

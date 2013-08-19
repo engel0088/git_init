@@ -40,7 +40,7 @@ class AddAmountTotalToOrders < ActiveRecord::Migration
     end
 
     add_column :keywords, :permalink, :string
-    Keyword.where("order = 'ID'").each do |kw|
+    Keyword.order(:id).each do |kw|
       kw.save
     end
 
