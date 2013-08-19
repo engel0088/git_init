@@ -8,12 +8,12 @@ class AddAmountTotalToOrders < ActiveRecord::Migration
     add_column :leads, :financing, :boolean
 
     add_column :categories, :permalink, :string
-    Category.find(:all).each do|c| 
+    Category.all.each do|c| 
       c.save
     end
 
     add_column :project_types, :permalink, :string
-    ProjectType.find(:all).each do |c|
+    ProjectType.all.each do |c|
       c.save
     end
 
@@ -33,7 +33,7 @@ class AddAmountTotalToOrders < ActiveRecord::Migration
 
     add_column :leads, :state_id, :integer
     
-    Lead.find(:all).each do |lead|
+    Lead.all.each do |lead|
       zip = ZipCode.find_by_code(lead.postal_code)
       lead.state = State.find_by_code(zip.state_code)
       lead.save!      
