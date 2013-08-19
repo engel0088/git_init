@@ -22,7 +22,7 @@ class AddAmountTotalToOrders < ActiveRecord::Migration
     add_column :leads, :category_id, :integer
     add_column :leads, :guid, :string
 
-    Lead.find(:all, :conditions => "category_id IS NULL").each do |lead|
+    Lead.where("category_id IS NULL").each do |lead|
       lead.save!
     end
 
@@ -40,7 +40,7 @@ class AddAmountTotalToOrders < ActiveRecord::Migration
     end
 
     add_column :keywords, :permalink, :string
-    Keyword.find(:all, :order => "ID").each do |kw|
+    Keyword.where("order = 'ID'").each do |kw|
       kw.save
     end
 

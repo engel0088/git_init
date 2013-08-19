@@ -1,12 +1,3 @@
-class AddComatoseSupport < ActiveRecord::Migration
-  def up
-  end
-
-  def down
-  end
-end
-
-
 # [FIXME] below module
 
 module Comatose
@@ -19,7 +10,7 @@ end
 class AddComatoseSupport < ActiveRecord::Migration
 
   # Schema for Comatose version 0.7+
-  def self.up
+  def change
     create_table :comatose_pages do |t|
       t.column "parent_id",   :integer
       t.column "full_path",   :text,   :default => ''
@@ -36,12 +27,13 @@ class AddComatoseSupport < ActiveRecord::Migration
     end
     Comatose::Page.create_versioned_table
     puts "Creating the default 'Home Page'..."
-    Comatose::Page.create( :title=>'Home Page', :body=>"h1. Welcome\n\nYour content goes here...", :author=>'System' )
-  end
 
-  def self.down
-    Comatose::Page.drop_versioned_table
-    drop_table :comatose_pages
+    p=Comatose::Page.new
+    p.title= 'Home Page'
+    p.body="h1. Welcome\n\nYour content goes here..."
+    p.author=>'System' 
+    p.save
+
   end
 
 end
