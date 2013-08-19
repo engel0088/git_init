@@ -1,7 +1,7 @@
 class InsertMobileCarriers < ActiveRecord::Migration
   def up
     add_column :mobile_carriers, :code, :string
-
+=begin
     [{:name => "Alltel Wireless", :code => "alltel"},
     {:name => "Ameritech Cellular", :code => "ameritech"},
     {:name => "AT&T/Cingular", :code => "at&t"},
@@ -25,7 +25,7 @@ class InsertMobileCarriers < ActiveRecord::Migration
       m.code = mobile[:code]
       m.save
     end
-
+=end
   end
 
   def down
