@@ -31,7 +31,7 @@ class AddComatoseSupport < ActiveRecord::Migration
     p=Comatose::Page.new
     p.title= 'Home Page'
     p.body="h1. Welcome\n\nYour content goes here..."
-    p.author=>'System' 
+    p.author='System' 
     p.save
 
   end
