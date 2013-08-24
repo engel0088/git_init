@@ -1,3 +1,3 @@
 class NewsletterAttachment < ActiveRecord::Base
-  # attr_accessible :title, :body
+  file_column :content
 end

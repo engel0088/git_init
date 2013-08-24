@@ -1,3 +1,9 @@
 class Memory < ActiveRecord::Base
-  # attr_accessible :title, :body
+  def self.remember(type, text)
+    
+    unless Memory.exists?(["tipe = ? AND text = ?", type, text])
+      Memory.create(:tipe => type, :text => text)
+    end
+  end
+
 end

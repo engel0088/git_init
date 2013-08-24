@@ -1,3 +1,4 @@
 class OrderChangeItem < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :order_change
+  belongs_to :monopoly
 end
