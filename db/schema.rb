@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819093848) do
+ActiveRecord::Schema.define(:version => 20130824130603) do
 
   create_table "anonymous_questionnaires", :force => true do |t|
     t.integer  "lead_id"
@@ -185,16 +185,6 @@ ActiveRecord::Schema.define(:version => 20130819093848) do
   create_table "order_changes", :force => true do |t|
     t.integer  "order_id"
     t.string   "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "order_mailers", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "order_payments", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
