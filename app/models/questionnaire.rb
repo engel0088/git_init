@@ -1,3 +1,8 @@
 class Questionnaire < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :project_type
+  
+  has_many :questions, :order => "position", :dependent => :destroy
+	
+  validates_presence_of :name
+
 end

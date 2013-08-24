@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130824130603) do
+ActiveRecord::Schema.define(:version => 20130824131757) do
 
   create_table "anonymous_questionnaires", :force => true do |t|
     t.integer  "lead_id"
@@ -216,11 +216,6 @@ ActiveRecord::Schema.define(:version => 20130824130603) do
     t.integer  "commission_payment_id"
     t.integer  "original_order_id"
     t.float    "amount_total"
-  end
-
-  create_table "paranoids", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "payments", :force => true do |t|
