@@ -1,0 +1,97 @@
+<% ########### LOGIC FOR TABS ############# %>
+<% # TODO: Encapsulate this in a better way %>
+<% if current_user.has_role?('admin') || current_user.has_role?('sales_person') %>
+	<% tabPeople = (params[:controller] == "sales_people" || params[:controller] == "contractors" || params[:controller] == "administrators") || params[:controller] == "leads" || params[:controller] == "monopolies" %>
+	<% tabOrders = (params[:controller] == "orders" || params[:controller] == "payments" || params[:controller] == "commissions_payments" || params[:controller] == "bonuses") %>
+	<% tabTools = (params[:controller] == "zip_codes" || params[:controller] == "categories" || params[:controller] == "project_types" || params[:controller] == "questionnaires" || params[:controller] == "questions" || params[:controller] == "newsletters" || params[:controller] == "settings") %>
+	<% tabReports = (params[:controller] == "comatose_admin") %>
+	<% tabWishLists = (params[:controller] == "wish_lists") %>
+<% elsif current_user.has_role?('contractor') %>
+
+<% tabZipCodes = (params[:controller] == "zip_codes" || params[:controller] == "monopolies" || params[:controller] == "wish_lists") %>
+<% tabLeads = (params[:controller] == "leads") %>
+<% tabPayments = (params[:controller] == "payments") %>
+
+<% end %>
+      <ul id="ulTabMenu">
+<% ######################### ADMIN and SALES_PERSON ######################### %>
+<% if current_user.has_role?('admin') || current_user.has_role?('sales_person') %>
+				<li class="<%= tabPeople ? "liSelected" : "liNotSelected" %>"><%= link_to "People", contractors_url %></li>
+				<li class="<%= tabOrders ? "liSelected" : "liNotSelected" %>"><%= link_to "Orders", orders_path %></li>
+				<li class="<%= tabTools ? "liSelected" : "liNotSelected" %>"><%= link_to "Tools", :controller => "zip_codes", :action => "search" %></li>
+				<li class="<%= tabReports ? "liSelected" : "liNotSelected" %>"><%= link_to "CMS", comatose_admin_path %></li>
+				<li class="liWishList<%= tabWishLists ? "" : "" %>"><%= link_to "<span class=\"WishListActive\">#{@active_wish_lists_count} Active</span> Wish Lists", :controller => "wish_lists", :action => "index" %>   
+</li>
+  <% if current_user.has_role?('admin') %>
+<li class="liWishList"><%= link_to "<span class=\"WishListActive\">#{@pending_orders_count} Pending</span> Orders", :controller => "orders", :action => "index", :order_status_filter => 'pending', :date_filter => 'all' %>
+</li>
+<li class="liWishList"><%= link_to "<span class=\"WishListActive\">#{@expiring_orders_count} Expiring</span> Orders", :controller => "orders", :action => "index", :order_status_filter => '', :sort_key => 'orders.end_date', :sort_order => 'asc', :date_filter => 'all' %>
+</li>
+  <% end %>
+<% ######################### CONTRACTOR ########################### %>
+<% elsif current_user.has_role?('contractor') %>
+				<li class="<%= tabLeads ? "liSelected" : "liNotSelected" %>"><%= link_to "Leads", leads_path %></li>
+
+        <li class="<%= tabZipCodes ? "liSelected" : "liNotSelected" %>"><%= link_to "Zip Codes", contractor_monopolies_path(current_user.contractor) %></li>
+        <li class="<%= tabPayments ? "liSelected" : "liNotSelected" %>"><%= link_to "Payments", payments_path %></li>
+		<% if @expiring_monopolies_count > 0%>
+        <li class="liWishList"><%= link_to "<span class=\"WishListActive\">#{@expiring_monopolies_count} Expiring</span>  Zip Codes!", contractor_monopolies_path(current_user.contractor) %></li>
+		<% end %>
+        <% if current_user.contractor.insurance_expiring? %>
+        <li class="liWishList"><%= link_to "<span class=\"WishListActive\">Insurance Expiring!</span>", contractor_path(current_user.contractor) %></li>
+        
+        <% end %>
+        
+<% end %>
+		  </ul>
+<% if tabPeople %>
+			<ul id="ulSubMenu">
+			<% if current_user.has_role?('admin') %>
+			  <li class="li<%= " liSelected" if params[:controller] == "sales_people" %>"><%= link_to "Salespeople", sales_people_url, :class => "aSelected" %></li>
+			  <li class="li<%= " liSelected" if params[:controller] == "contractors" %>"><%= link_to "Contractors", contractors_url %></li>
+              <li class="li<%= " liSelected" if params[:controller] == "administrators" %>"><%= link_to "Administrators", :controller => "administrators", :action => "index" %></li>
+			  <li class="li<%= " liSelected" if params[:controller] == "leads" %>"><%= link_to "Leads", leads_url %></li>
+			  <li class="li<%= " liSelected" if params[:controller] == "monopolies" && params[:action] == "index" %>"><%= link_to "Contractors Zips", monopolies_path %></li>
+			  <li class="<%= "liSelected" if params[:controller] == "contractors" && params[:action] == "expirations" %>"><%= link_to "Contractors Expiring Zips", contractor_expirations_path %></li>
+			  
+			<% elsif current_user.has_role?('sales_person') %>
+  			    <li class="li<%= " liSelected" if params[:controller] == "contractors" %>"><%= link_to "Contractors", contractors_url %></li>
+                            <li class="li<%= " liSelected" if params[:controller] == "leads" %>"><%= link_to "Leads", leads_url %></li>
+			    <li class="<%= "liSelected" if params[:controller] == "contractors" && params[:action] == "expirations" %>"><%= link_to "Contractors Expiring Zips", contractor_expirations_path %></li>
+
+			<% end %>
+			</ul>
+<% elsif (current_user.has_role?('admin') || current_user.has_role?('sales_person')) && tabTools %>
+      <ul id="ulSubMenu">
+        <li class="li<%= " liSelected" if params[:controller] == "zip_codes" && params[:action] == "search" %>"><%= link_to "Zip Codes", :controller => "zip_codes", :action => "search" %></li>
+        <% if current_user.has_role?('admin') %>
+				<li class="li<%= " liSelected" if params[:controller] == "categories" || params[:controller] == "project_types" || params[:controller] == "questionnaires" || params[:controller] == "questions" %>"><%= link_to "Categories", :controller => "categories", :action => "index" %></li>
+<li class="li<%= " liSelected" if params[:controller] == "newsletters" %>"><%= link_to "Newsletters", :controller => "newsletters", :action => "new" %></li>
+<li class="li<%= " liSelected" if params[:controller] == "settings" %>"><%= link_to "System Settings", settings_path %></li>
+<li class="li<%= " liSelected" if params[:controller] == "zip_codes" && params[:action] != "search" %>"><%= link_to "Edit Zip Codes", zip_codes_path %></li>
+
+        <% end %>
+      </ul>
+<% elsif tabOrders %>
+      <ul id="ulSubMenu">
+      	<li class="li<%= " liSelected" if params[:controller] == "orders" && params[:action] == "index" %>"><%= link_to "Manage", orders_path %></li>
+				<li class="li<%= " liSelected" if params[:action] == "new" || params[:action] == "create" %>"><%= link_to "New", new_order_path %></li>
+<%   if current_user.has_role?('admin') %>
+        <li class="li<%= " liSelected" if params[:controller] == "payments" && params[:action] == "index" %>"><%= link_to "Payment History", payments_path %></li>
+<%   end %>
+      	<li class="li<%= " liSelected" if params[:controller] == "commissions_payments" && params[:action] == "index" %>"><%= link_to "Commissions Paid", commissions_payments_path %></li>
+<%   if current_user.has_role?('admin') %>
+  <li class="li<%= " liSelected" if params[:controller] == "bonuses" %>"><%= link_to "Bonus Manager", bonuses_path %></li>
+<%   end %>
+      </ul>
+<% elsif current_user.has_role?("contractor") && tabZipCodes %>
+
+       <ul id="ulSubMenu">
+         <li class="li<%= " liSelected" if params[:controller] == "monopolies" %>"><%= link_to "My Zip Codes", contractor_monopolies_path(current_user.contractor) %></li>
+         <li class="li<%= " liSelected" if params[:controller] == "wish_lists" %>"><%= link_to "My Wishlist", contractor_wish_list_path(current_user.contractor, :show)  %></li>
+         <li class="li<%= " liSelected" if params[:controller] == "zip_codes" %>"><%= link_to "Find more Zip Codes", :controller => "zip_codes", :action => "search" %></li>
+         <li class="li"><%= link_to "Preview result page", {:controller => "public", :action => "results", :contractor_id => current_user.contractor}, :target => "_blank" %></li>
+       </ul>
+<% else %>
+      <ul id="ulSubMenu"></ul>
+<% end %>

@@ -1,4 +1,8 @@
 Hiex::Application.routes.draw do
+
+  resources :public
+  root :to => 'public#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

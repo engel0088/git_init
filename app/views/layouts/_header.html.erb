@@ -1,0 +1,22 @@
+		<div id="divHeader">
+      <%= link_to image_tag("logo.jpg", :alt => "Logo", :class => "fleft", :border => 0), root_url %>
+			<ul id="ulTopMenu">
+				<li><%= link_to "Signout", logout_url, :id => "lnkSignout" %></li>
+<% if current_user.has_role?('admin') %>
+        <li class="li"><%= link_to "Settings", {:controller => "administrators", :action => "show", :id => current_user}, :id => "lnkSettings"  %></li>
+<% elsif current_user.has_role?('sales_person') %>
+        <li class="li"><%= link_to "Settings", sales_person_path(current_user.sales_person), :id => "lnkSettings" %></li>
+<% elsif current_user.has_role?('contractor') %>
+        <li class="li"><%= link_to "Settings", contractor_path(current_user.contractor), :id => "lnkSettings" %></li>
+<% end %>
+				<li class="li"><b>Welcome, <%= current_user.greeting_name %></b></li>
+			</ul>
+			<% if !current_user.has_role?('admin') && current_user.has_role?('contractor') %>
+			<div id="topSalesInfo">
+				<% if current_user.contractor.sales_person %>
+			Sales person: <b><%=h current_user.contractor.sales_person.name %></b><br />phone: <b><%=h current_user.contractor.sales_person.phone %></b><br />email: <b><%= link_to current_user.contractor.sales_person.email, "mailto: #{current_user.contractor.sales_person.email}" %></b>
+			<% end %>
+			</div>
+			<% end %>
+			
+		</div>

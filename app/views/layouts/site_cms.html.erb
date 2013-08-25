@@ -1,0 +1,68 @@
+<% @title ||= "#{@page ? @page.title : @page_title} - HomeImprovementExpo.com" %>
+<% @meta_description ||= "#{@page ? @page.title : @page_title} - Search for local contractors. Get matched to a prescreened, certified, insured contractor who will call you withn 24 hours, guaranteed." %>
+
+<% @content_for_layout = capture do %>
+
+<div align="center" class="center_bg">
+  <div class="header_logo">
+   <table width="794" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td width="419" height="106" rowspan="2" valign="top"><%= link_to image_tag("expo_header_left.gif", :alt => "Home Improvement Expo logo", :width => 419, :height => 106, :border => 0), :controller => :public, :action => :index %></td><td width="375" height="72" valign="top"><%= image_tag "expo_header_right.gif", :alt => "Find a local contractor by contacting us!", :width => 375, :height => 72, :border => 0 %></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="menu_top"><%= link_to "Home", :controller => :public, :action => :index %>&nbsp;&nbsp;<%= link_to "About Us", comatose_root_url(:page => "about"), :rel => "nofollow" %>&nbsp;&nbsp;<%= link_to "Contact Us", {:controller => :public, :action => :contact}, :rel => "nofollow" %></td>
+    </tr>
+   </table>
+  </div>
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="105" valign="top"><div align="center">
+        <table width="754" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top" class="content_container">
+               <table width="97%" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="100%" height="60" class="page_title"><h1><%= @page ? @page.title : @page_title %></h1></td>
+                </tr>
+                <tr>
+                  <td class="page_content">
+                  	<% unless flash[:notice].blank? %>
+					<span style="color: red"><b><%=h flash[:notice] %></b></span><br /><br />
+					<% end %>
+					
+                	<%= yield :layout %>
+					<% if @page && @page.parent && @page.parent.parent %>
+					  <% if @page.parent.slug == "resource-center" %>
+						<b><%= link_to "Back", :controller => "public", :action => "resources" %></b>
+					  <% else %>
+						<b><%= link_to "Back", comatose_root_url(:page => @page.parent.full_path) %></b>
+					  <% end %>
+					<% end %>
+                  </td>
+                </tr>
+               </table>
+              </td>
+            </tr>
+          </table>
+		  <p>&nbsp;</p>
+          <%= render :partial => './public/footer_menu' %>
+      </div></td>
+    </tr>
+  </table>
+  <table width="782" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#CBCBCB">
+      <td height="1"></td>
+    </tr>
+    <tr>
+      <td height="20"><div align="center"><span class="footer_grey">&nbsp;</span></div></td>
+    </tr>
+ <tr bgcolor="#CBCBCB">
+      <td height="1"></td>
+    </tr>
+  </table>
+  <br />
+</div>
+
+	
+<% end %>
+<%= render 'layouts/site', { 'content_for_layout' => @content_for_layout } %>

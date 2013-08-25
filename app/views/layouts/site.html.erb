@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><%= @title || "Find Local Licensed Contractors - Home Improvement Network" %></title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta name="Description" content="<%= @meta_description || "Search for contractors near you. Get a no-obligation quote from a licensed, insured professional within 24 hours, guaranteed!" %>" />
+<%= stylesheet_link_tag 'site' %>
+<%# javascript_include_tag :defaults %>
+<%= yield :head %>
+<%= javascript_include_tag "utils" %>
+<link rel="shortcut icon" href="/images/favicon.ico" />
+
+<SCRIPT language="JavaScript" type="text/javascript">
+<!-- Yahoo! Inc.
+var ysm_accountid  = "1EVG8DJLTJM1KL24UH2O40R0B4G";
+document.write("<SCR" + "IPT language='JavaScript' type='text/javascript' " 
++ "SRC=//" + "srv1.wa.marketingsolutions.yahoo.com" + "/script/ScriptServlet" + "?aid=" + 
+ysm_accountid 
++ "></SCR" + "IPT>");
+// -->
+</SCRIPT>
+
+
+</head>
+<body>
+
+<div align="center">
+  
+  <%= yield  %>
+  
+</div>
+<div align="center"></div>	
+  
+<%= yield :tracking %>
+  
+  
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4821795-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+  
+</body>
+</html>
