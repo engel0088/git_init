@@ -1,0 +1,7 @@
+<select name="project_type_id" class="fields_blk" id="project_type">
+  <option>Select Project Type</option>
+  <% @project_types.each do |project_type| %>
+  <option value="<%= project_type.id %>"><%= project_type.name %></option>
+  <% end %>
+</select>
+<span id="indicator" style="display: none"><%= image_tag 'indicator.gif' %></span>

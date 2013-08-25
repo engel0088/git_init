@@ -1,0 +1,50 @@
+<% @page_title = "Contact us" %>
+<h1>Contact Us</h1>
+<p class="notopmargin"><strong>At HomeImprovementExpo.com, customer satisfaction is the name of the game.</strong> Whether you are a contractor or a homeowner, we're not happy until you  are; our customer service professionals aim for nothing less than  win-win solutions for all. Contact us using one of the following methods:</p>
+                    <h6>By mail:</h6>
+                    <p class="notopmargin">Home Improvement Expo, Inc.<br />
+                      303 Merrick Rd., Suite 402<br />
+                      Lynbrook, NY 11563</p>
+                    <h6 class="notopmargin">By phone:<br />
+                    </h6>
+                    <p class="notopmargin">
+                    	<strong>Toll Free:</strong> 1-866-945-EXPO<br />
+						<strong>Phone:</strong> 516-945-6200<br />
+                      <strong>Fax:</strong> 516-593-4949</p>
+                    <h6 class="notopmargin">Using our Online Form:</h6>
+					
+					<% if request.post? %>
+					<br /><br /><br />
+					<b>Thank you for contacting Home Improvement Expo! We will get back to you as soon as possible.</b>
+					<br /><br /><br />
+					
+					<% else %>
+					<%= form_tag %>
+                    <table border="0" cellspacing="0" cellpadding="6">
+                      <tr>
+                        <td valign="middle">Your Name</td>
+                        <td><%= text_field_tag "name" %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Company</td>
+                        <td><%= text_field_tag "company" %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Daytime Phone</td>
+                        <td><%= text_field_tag "phone" %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Email Address</td>
+                        <td><%= text_field_tag "email" %></td>
+                      </tr>
+                      <tr>
+                        <td valign="top">Comments</td>
+                        <td><%= text_area_tag "comment", '', :rows => 6, :cols => 45 %></td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">&nbsp;</td>
+                        <td valign="top"><%= submit_tag "Submit Information" %></td>
+                      </tr>
+                    </table>
+					</form>
+                    <% end %>

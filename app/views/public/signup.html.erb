@@ -1,0 +1,62 @@
+<% @page_title = "Register as a Contractor" %>
+<% content_for(:head) do %>
+<%= javascript_include_tag "prototype" %>
+<% end %>
+
+<% if request.post? && flash[:error].blank? %>
+					<br /><br /><br />
+					<b>Thank you for your interest in joining Home Improvement Expo! We will get back to you as soon as possible.</b>
+					<br /><br /><br />
+					<%= render :partial => "b2b_lead_js_code" %>
+					
+					<% else %>
+					<%= form_tag %>
+					<span style="color: red"><%= flash[:error] %></span>
+                    <table border="0" cellspacing="0" cellpadding="6">
+                      <tr>
+                        <td valign="middle">Your Name*</td>
+                        <td><%= text_field_tag "name", params[:name] %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Company</td>
+                        <td><%= text_field_tag "company", params[:company] %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Zip Code*</td>
+                        <td><%= text_field_tag "zip_code", params[:zip_code] %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Phone*</td>
+                        <td><%= text_field_tag "phone", params[:phone], :onKeyPress => "return phoneonly(this, event)" %></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle">Cellphone*</td>
+                        <td><%= text_field_tag "mobile", params[:mobile] %></td>
+                      </tr>
+					  <tr>
+                        <td valign="middle">Email*</td>
+                        <td><%= text_field_tag "email", params[:email] %></td>
+                      </tr>
+					  
+					  <tr>
+					  	<td valign="middle">Service Category*</td>
+						<td>
+							<%= select_tag "category", '<option value="">Select a Category</option>' + options_from_collection_for_select(@categories, :name, :name, params[:category]) %>
+						</td>
+					  </tr>
+                      <tr>
+                        <td valign="middle">Where did you find us</td>
+                        <td>
+                        	<%= select_tag "where_found_us", options_for_select(["Please select", "Google", "Yahoo!", "MSN / Live", "AOL", "NJ.com", "Email", "Radio", "Television", "News", "Referred by"], params[:where_found_us]) %>
+							<%= observe_field "where_found_us", :function => "if($('where_found_us').value == 'Referred by') { $('referred_by').show() } else { $('referred_by').hide() }" %>
+							<%= text_field_tag "referred_by", params[:referred_by], :style => (params[:where_found_us] == "Referred by" ? "" : "display: none;") %>
+							
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">&nbsp;</td>
+                        <td valign="top"><%= submit_tag "Submit" %></td>
+                      </tr>
+                    </table>
+					</form>
+                    <% end %>

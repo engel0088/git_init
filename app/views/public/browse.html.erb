@@ -1,0 +1,18 @@
+<% @meta_description = "Search for local Contractors. Get matched to a prescreened, certified, insured contractor who will call you immediately." %>
+<table cellpadding="8" cellspacing="0" border="0" align="center">
+     <tr>
+     	<% col_size = (@keywords.size / 4.0).ceil %>
+     	
+		<% @keywords.each_with_index do |keyword, i| %>
+          <% if i % col_size == 0 %>
+          <td align="left" valign="top" class="browse_categories">		
+	      <% end %>				
+          <%= image_tag "arrow.jpg" %>&nbsp;<%= link_to keyword.name, browse_path(keyword.permalink) %><br />
+
+          <% if i + 1 % col_size == 0 %>
+          </td>
+          <% end %>
+	    <% end %>
+     </tr>
+
+    </table>

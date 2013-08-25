@@ -1,0 +1,127 @@
+<table width="550" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="20%"><div align="left">
+                        	<% if contractor.logo %>
+							  <% unless contractor.website.blank? %>
+							  <%= link_to image_tag(url_for_file_column("contractor", "logo", "standard"), :alt => contractor.company_name, :border => 0), "http://#{contractor.website}" %>
+							  <% else %>
+							  <%= image_tag url_for_file_column("contractor", "logo", "standard"), :alt => contractor.company_name if contractor.logo %>
+							  <% end %>
+							<% end %>
+							
+							</div></td>
+                        <td width="80%"><div align="center">
+                          <table cellspacing="0" cellpadding="3" border="0">
+                          	
+							<% unless contractor.company_name.blank? %>
+                            <tr>
+                              <td width="70" height="20"><div align="left"><strong>Company:</strong></div></td>
+                              <td width="178"><div align="left" class="navy_header_bold"><%=h contractor.company_name %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.name.blank? %>
+                            <tr>
+                              <td height="20"><div align="left"><strong>Contact:</strong></div></td>
+                              <td><div align="left" class="main_navy_bold"><%=h contractor.name %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.website.blank? %>
+                            <tr>
+                              <td height="20"><div align="left"><strong>Website:</strong></div></td>
+                              <td><div align="left"><%= link_to contractor.website, "http://#{contractor.website}" %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.email.blank? || contractor.email_hide %>
+                            <tr>
+                              <td height="20"><div align="left"><strong>Email:</strong></div></td>
+                              <td><div align="left"><%= link_to contractor.email, "mailto: #{contractor.email}" %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.phone.blank? %>
+                            <tr>
+                              <td height="20"><div align="left"><strong>Phone:</strong></div></td>
+                              <td><div align="left"><%=h contractor.phone %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.mobile.blank? || contractor.mobile_hide %>
+                            <tr>
+                              <td height="20"><div align="left"><strong>Mobile:</strong></div></td>
+                              <td><div align="left"><%=h contractor.mobile %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.fax.blank? || contractor.fax_hide %>
+                            <tr>
+                              <td height="20"><div align="left"><strong>Fax:</strong></div></td>
+                              <td><div align="left"><%=h contractor.fax %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.address.blank? || contractor.address_hide %>
+							<tr>
+                              <td height="20"><div align="left"><strong>Address:</strong></div></td>
+                              <td><div align="left"><%=h contractor.address %></div></td>
+                            </tr>
+							<% end %>
+							
+							
+							<% unless contractor.city.blank? %>
+							<tr>
+                              <td height="20"><div align="left"><strong>City:</strong></div></td>
+                              <td><div align="left"><%=h contractor.city %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.state.nil? %>
+							<tr>
+                              <td height="20"><div align="left"><strong>State:</strong></div></td>
+                              <td><div align="left"><%=h contractor.state.name %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.postal_code.blank? %>
+							<tr>
+                              <td height="20"><div align="left"><strong>Zip:</strong></div></td>
+                              <td><div align="left"><%=h contractor.postal_code %></div></td>
+                            </tr>
+							<% end %>
+
+							<% unless contractor.insurance_certificate.blank? %>
+							<tr>
+                              <td height="20"><div align="left"><strong>Insurance Company:</strong></div></td>
+                              <td><div align="left"><%=h contractor.insurance_certificate %></div></td>
+                            </tr>
+							<% end %>
+
+							<% unless contractor.license_number.blank? %>
+							<tr>
+                              <td height="20"><div align="left"><strong>Licence Number:</strong></div></td>
+                              <td><div align="left"><%=h contractor.license_number %></div></td>
+                            </tr>
+							<% end %>
+							
+							<% unless contractor.date_founded.nil? %>
+							<tr>
+                              <td height="20"><div align="left"><strong>Date Company Founded:</strong></div></td>
+                              <td><div align="left"><%=h contractor.date_founded.strftime("%B %Y") %></div></td>
+                            </tr>
+							<% end %>
+							
+							
+                          </table>
+                        </div></td>
+                        <td width="20%"><div align="right"><%= image_tag "certified_contractor.gif", :width => 90, :height => 132, :alt => "CERTIFIED Contractor" %></div></td>
+                      </tr>
+                    </table>
+	             <p class="blue_lt"><%= format_newlines(h contractor.company_description) %></p>
+                  <p><span class="navy_header_bold"><%=h contractor.company_name %></span> <span class="main_navy_bold">has just received your request and will get back to you 
+                    imediately.<br />
+					<% unless contractor.phone.blank? %>
+                    If you wish you can contact them at </span><span class="navy_header_bold"><%=h contractor.phone %></span>.</p>
+					<% end %>
+                  <p>&nbsp;</p>

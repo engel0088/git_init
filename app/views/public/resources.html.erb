@@ -1,0 +1,45 @@
+<% @page_title = @page.title %>
+<% content_for(:head) do %>
+<%= javascript_include_tag "prototype" %>
+<% end %>
+
+<% cache "resources_news", 1.hour.from_now do %>
+<div class="resources_news">
+<div class="newsHeader">Latest News</div>
+<% unless flash[:error].blank? %>
+<span style="color: red"><%=h flash[:error] %></span>
+<% end %>
+<% @feed_articles.each_with_index do |article, i| %>
+<%= link_to article.title, article.link if i < 5 %><br />
+<% end %>
+</div>
+<% end %>
+
+
+<%= render :comatose=>'resource-center' %>
+
+<h6>Articles</h6>
+
+
+<ul>
+<% displayed_articles = 25 %>
+<% @articles.each_with_index do |article, i| %>
+<% if i == displayed_articles %>
+</ul>
+<%= link_to_function "more...", "$('more_articles').toggle(); this.hide();" %>
+<div id="more_articles" style="display: none;">
+additional articles:
+<ul class="more_articles">
+<% end %>	
+
+<li><%= link_to article.title, comatose_root_url(:page => article.full_path) %></li>
+
+<% end %>
+<% if @articles.size > displayed_articles %>
+</ul>
+</div>
+<% else %>
+</ul>
+<% end %>
+
+

@@ -1,0 +1,109 @@
+
+  <table cellspacing="0" cellpadding="0">
+    <tr>
+      <td><%= image_tag "home_improvement_logo.jpg", :alt => "Home Improvement Expo logo", :width => 420, :height => 112 %><%= image_tag "header_contact_us.jpg", :alt => "CONTACT US TOLL FREE 1.866.945.EXPO", :width => 394, :height => 112 %></td>
+    </tr>
+    <tr>
+      <td><table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="514" valign="top" class="chasing_contractors"><div id="home_no_obligation">
+            <span class="navy_header_bold"><h1>Tired of chasing contractors?</h1></span><br />
+              <span class="orange_header_bold">&nbsp;&nbsp;<h2>Get a No-obligation quote from a local contractor NOW!</h2></span><br />
+              <span class="navy_header">&nbsp;&nbsp;&nbsp;&nbsp;All contractors are fully licensed and insured professionals.</span><br />
+
+              <span class="navy_header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Best of all, it's absolutely</span> <span class="navy_header_bold">FREE!</span>
+            </div></td>
+          <td width="300"><%= image_tag "24h_gauranteed.jpg", :alt => "Your contractor will call you within 24 hours! Guaranteed!", :width => 300, :height => 126 %></td>
+        </tr>
+      </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+      	
+		<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td width="352" valign="top"><table align="left" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="34" height="463" class="search_bg">                </td>
+              <td valign="top"><table width="298" cellpadding="0" cellspacing="0">
+                <tr>
+
+                  <td height="131" class="magnify_bg"><div align="right" class="wht_header" id="magnify_glass">Get matched to a<br />
+                    local pre-screened<br />
+                    <span class="wht_header_big">CONTRACTOR NOW!</span></div></td>
+                </tr>
+                <tr>
+                  <td height="155" class="search_middle_bg">
+                  	
+					
+					<%= render :partial => "mini_form" %>
+                  	</td>
+
+                </tr>
+                <tr>
+                  <td height="49" class="search_bottom">&nbsp;</td>
+                </tr>
+              </table>
+                <p align="center"><%= link_to image_tag("visit_resource_center.jpg", :alt => "Visit the HOME IMPROVEMENT RESOURCE CENTER!", :width => 138, :height => 121, :border => 0) , :controller => 'public', :action => 'resources' %></a><%= link_to image_tag("visit_licenced_contractors.jpg", :alt => "LICENCED CONTRACTORS can sign up HERE", :width => 127, :height => 121, :border => 0) , sign_up_url %></a></p></td>
+            </tr>
+          </table>            </td>
+
+          <td width="433" valign="top">
+        <% if @lead && @lead.errors.size > 0 %>  	
+		<div class="form_error_home">			
+		  <strong>The following errors occurred when processing the form:</strong><br /><br />
+		     <% @lead.errors.each do |attr, message| %>
+          	  &bull; Your <%= attr.humanize %> <%= message %><br />
+			 <% end %>
+        </div>
+	    <% end %>
+		<table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><%=  %>
+							&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td><table cellpadding="4" cellspacing="0" border="0" class="main_navy_bold">
+			
+			<% half = (@categories.size / 2) %>
+			<% (0..half-1).each do |i| %>
+            
+     	       <tr>
+        	      <td><%= image_tag "arrow.jpg", :alt => "bullet", :width => 11, :height => 10 %></td>
+            	  <td><div align="left"><%= link_to @categories[i].name, public_category_url(@categories[i].permalink) %></div></td>
+	            </tr>
+                
+			<% end %>
+              </table></td>
+              <td><table cellpadding="4" cellspacing="0" border="0" class="main_navy_bold">
+			
+			<% (half..@categories.size-1).each do |i| %>
+            
+     	       <tr>
+        	      <td><%= image_tag "arrow.jpg", :alt => "bullet", :width => 11, :height => 10 %></td>
+            	  <td><div align="left"><%= link_to @categories[i].name, public_category_url(@categories[i].permalink) %></div></td>
+	            </tr>
+                
+			<% end %>
+              </table></td> 
+            </tr>
+          </table></td>
+            
+
+          <td width="29" height="463" class="main_right"></td>
+        </tr>
+      </table></td>
+    </tr>
+    <tr>
+      <td height="26" class="main_bottom">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="105" valign="top" class="footer_bg"><div align="center">
+
+        <%= render :partial => 'footer_menu' %>
+      </div></td>
+    </tr>
+  </table>

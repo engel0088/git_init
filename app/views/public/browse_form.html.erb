@@ -1,0 +1,79 @@
+<% @title = "Find #{@keyword.name.titleize} Near You – HomeImprovementExpo.com" %>
+<% @meta_description = "Search for local #{@keyword.name.titleize}. Get matched to a prescreened, certified, insured contractor who will call you immediately." %>  
+    <table width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="48%" valign="top"><br /><br /><table align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="153" valign="top"><%= image_tag "expo_experts.gif", :alt => "All CONTRACTORS are certified experts and will contact you within 24 hours!", :width => 329, :height => 153 %></td>
+          </tr>
+          <tr>
+            <td height="76" valign="top" class="form_bg">
+
+             <div id="get_matched">
+              Get matched to a<br />
+                local pre-screened<br />
+                <h2><span class="wht_header_big">CONTRACTOR  NOW!</span></h2></div></td>
+          </tr>
+          <tr>
+            <td height="220" class="search_bottom2">
+            	
+            	<%= render :partial => "mini_form" %>
+				
+            </td>
+          </tr>
+
+        </table>        </td>
+
+        <td width="52%" valign="top"><table width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="browse_categories">
+              <% if @keyword.children.size > 0 %>	
+				<h5>More <%=h @keyword.name.titleize %>:</h5>
+			    <% @keyword.children.each do |child| %>
+              <%= image_tag "arrow.jpg" %>&nbsp;<%= link_to child.name.titleize, browse_path(child.permalink) %><br />
+			    <% end %>
+			   <% end %>
+              <br /><%= image_tag "expo_get_matched_top_browse.gif", :width => 379, :height => 170, :alt => "Get matched to certified #{@keyword.name.titleize}" %>
+			  </td>
+
+          </tr>
+          <tr>
+            <td>
+              <table width="97%" align="center" cellpadding="4" cellspacing="0">
+                <tr>
+                  <td height="10"></td>
+                  <td height="10"></td>
+                </tr>
+                <tr>
+
+                  <td width="7%" valign="top"><div align="center" class="big_numbers">1</div></td>
+                  <td width="93%"><strong>Select your home improvement project</strong></td>
+                </tr>
+                <tr>
+                  <td valign="top"><div align="center" class="big_numbers">2</div></td>
+                  <td><strong>Tell us about your project details</strong></td>
+                </tr>
+
+                <tr>
+                  <td valign="top"><div align="center" class="big_numbers">3</div></td>
+                  <td valign="top"><strong>Get matched to a licensed and insured local<br /> 
+                    contractor 
+                    that is pre-screened by<br /> 
+                    Home Improvement Expo</strong></td>
+                </tr>
+              </table>              
+              <p>&nbsp;</p></td>
+
+          </tr>
+        </table>        </td>
+      </tr>
+      <tr>
+        <td height="35">&nbsp;</td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+
+        <td colspan="2">&nbsp;</td>
+      </tr>
+    </table>
+

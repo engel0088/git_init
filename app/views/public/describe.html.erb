@@ -1,0 +1,154 @@
+<% @title = "Find #{@project_type.name if @project_type} Contractors Near You – HomeImprovementExpo.com" %>
+<% @meta_description = "Search for local #{@project_type.name if @project_type} contractors. Get matched to a prescreened, certified, insured contractor who will call you withn 24 hours, guaranteed." %>
+
+<% content_for(:head) do %>
+<SCRIPT language="JavaScript" type="text/javascript">
+<!-- Yahoo! Inc.
+// Event Type ID: 1
+// Segment Type ID: 0
+if (typeof(window.ysm_customData) != 'object') window.ysm_customData = new Object();
+window.ysm_customData.segment_1OBFM96JQLV5BU = "event=0,transId=,currency=,amount=";
+// -->
+</SCRIPT>
+
+<% end %>
+
+
+<div align="center" class="center_bg">
+  <div class="header_logo">
+   <table width="794" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td width="419" height="106" rowspan="2" valign="top"><%= link_to image_tag("expo_header_left.gif", :alt => "Home Improvement Expo logo", :width => 419, :height => 106, :border => 0), :controller => :public, :action => :index %></td><td width="375" height="72" valign="top"><%= image_tag "expo_header_right.gif", :alt => "Find a local contractor by contacting us!", :width => 375, :height => 72, :border => 0 %></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="menu_top"><%= link_to "Home", :controller => :public, :action => :index %>&nbsp;&nbsp;<%= link_to "About Us", comatose_root_url(:page => "about") %>&nbsp;&nbsp;<%= link_to "Contact Us", :controller => :public, :action => :contact %></td>
+    </tr>
+   </table>
+  </div>
+  <div id="breadcrumbs" >
+  <%= link_to "Home", :controller => :public, :action => :index %> &gt; <%= link_to(@category.name, public_category_url(@category.permalink, :lead_guid => @lead_guid || params[:lead_guid])) if @category %> &gt; <%=h @project_type.name if @project_type %>
+  </div>
+
+  <h1 class="h1-left"><%=h @project_type.name %></h1>
+ <%# error_messages_for :lead %>
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="105" valign="top"><div align="center">
+       <% form_for(:lead, @lead, :url => {:action => 'submit'}) do |l| %>
+	     <%= l.hidden_field :project_type_id %>
+	     <%= l.hidden_field :guid unless @lead.new_record?%>
+        <table width="754" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top" class="step2_top">
+              
+              
+              
+              <table width="92%" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+
+                  <td><p>&nbsp;</p>
+                      <p align="left"><br />
+					    <%= image_tag "title_contact_info.gif", :alt => "YOUR CONTACT INFORMATION", :width => 238, :height => 20 %></p>
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="23%"><div align="left">Your Name:</div></td>
+                          <td width="77%"><div align="left">
+                          	<%= l.label :name, "" %>
+                           	<%= l.text_field :name, :size => 30 %>
+                          </div></td>
+
+                        </tr>
+                        <tr>
+                          <td><div align="left">Your Zip Code:</div></td>
+                          <td><div align="left">
+                          	<%= l.label :postal_code, "" %>
+                           	<%= l.text_field :postal_code, :maxlength => 5, :size => 30, :onKeyPress => "return numbersonly(this, event)" %>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div align="left">Your Phone:</div></td>
+                          <td><div align="left">
+                          	<%= l.label :phone, "" %>
+                           	<%= l.text_field :phone, :maxlength => 15, :size => 30, :onKeyPress => "return phoneonly(this, event)" %>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div align="left">Your Email:</div></td>
+                          <td><div align="left">
+                          	<%= l.label :email, "" %>
+                           	<%= l.text_field :email, :size => 30 %>
+                          </div></td>
+
+                        </tr>
+                        <!--
+						<tr>
+                          <td><div align="left"><%= image_tag "title_your_address.gif", :width => 86, :height => 16 %></div></td>
+                          <td><div align="left">
+                           	<%# l.text_field :address %>
+                          </div></td>
+                        </tr> -->
+                    </table></td>
+                  <td valign="top"><table width="100%" cellspacing="0" cellpadding="0">
+
+                      <tr>
+                        <td height="25">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><div align="center"><%= image_tag "nav1b.gif", :alt => "CHOOSE your project", :width => 137, :height => 27 %></div></td>
+                      </tr>
+                      <tr>
+                        <td><div align="center"><%= image_tag "nav2a.gif", :alt => "DESCRIBE your project", :width => 137, :height => 28 %></div></td>
+                      </tr>
+                      <tr>
+                        <td><div align="center"><%= image_tag "nav3b.gif", :alt => "VIEW your results", :width => 137, :height => 24 %></div></td>
+                      </tr>
+                  </table></td>
+                </tr>
+                <tr>
+                  <td height="70" colspan="2"><%= image_tag "callme_30-2.gif", :alt => "Call me in 30 minutes",  :width => 184, :height => 28, :onclick => "$('callin30').checked = true" %><%= l.radio_button :call_me, "30 minutes", :id => "callin30" %>&nbsp;&nbsp;&nbsp;<%= image_tag "callme_emergency-2.gif", :alt => "Call me right away!", :width => 167, :height => 28, :onclick => "$('callnow').checked = true" %><%= l.radio_button :call_me, "RIGHT AWAY", :id => "callnow" %>&nbsp;&nbsp;&nbsp;<%= image_tag "callme_24.gif", :alt => "Call within 24 hours",  :width => 178, :height => 28, :onclick => "$('call24').checked = true" %><%= l.radio_button :call_me, "24 hours", :id => "call24" %></td>
+                  </tr>
+              </table></td>
+            </tr>
+            <tr>
+              <td valign="top" class="step2_bottom">
+                <table width="92%" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="100%"><div align="left"><%= image_tag "title_desc_project.gif", :alt => "DESCRIBE YOUR PROJECT", :width => 215, :height => 20 %> (All questions are optional)</div></td>
+                </tr>
+                <tr>
+                  <td class="questionnaire" valign="top">
+				    <% @questions.each do |question| %>
+					<div class="question"><%= h question.name.humanize %></div>
+					<%# hidden_field_tag "lead[questionnaire][][question_id]", question.id %>
+				    <div class="answer"><%= display_field(question, "lead[questionnaire]") %></div><br />				  
+				    <% end %>
+                    <p align="left"><%= image_tag "dollar_sign.gif", :alt => "Dollar Sign", :width => 11, :height => 21, :hspace => 5, :align => "absmiddle" %><strong>Do you need financing for this project?</strong>&nbsp;&nbsp;<label for="financing-yes">Yes</label>
+                      <%= l.radio_button :financing, true, :id => "financing-yes" %>
+                    <label for="financing-no">No</label>
+                      <%= l.radio_button :financing, false, :id => "financing-no" %>
+                    </p>
+                    <p align="right">
+					    <%= image_submit_tag "btn_match_me.gif", :id => "imageField", :alt => "Match me NOW!" %>
+                          <br />
+                    </p>                    
+					</td>
+                </tr>
+              </table>
+                  <p>&nbsp;</p>
+                             </td>
+            </tr>
+          </table>
+          <% end %>
+           <p>&nbsp;</p>
+          <%= render :partial => 'footer_menu' %>
+            <br />
+            <br />
+        </p>
+      </div></td>
+    </tr>
+
+  </table>
+  <br />
+</div>
+
+

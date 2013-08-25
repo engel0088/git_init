@@ -1,0 +1,67 @@
+<%= javascript_include_tag "formautovalidate" %>
+					<%= form_tag({:action => "index"}, {:onsubmit => "return AVF_Validate(this)"}) %>
+                    <table width="90%" align="right" cellpadding="4" cellspacing="0">
+
+                      <tr>
+                        <td width="24%" class="main_wht"><div align="right"><%= image_tag "title_name.gif", :width => 34, :height => 11 %></div></td>
+                        <td width="76%">
+                          <div align="left">
+                          	<%= text_field_tag "lead[name]", @lead.name, :class => "fields_blk", :size => 25, :required => "true", :requiredmessage => "Please enter your Name", :niceName => "Name" %>
+                            </div></td>
+                      </tr>
+                      <tr>
+                        <td class="main_wht"><div align="right"><%= image_tag "title_phone.gif", :width => 38, :height => 11 %></div></td>
+
+                        <td>
+                          <div align="left">
+                          	<%= text_field_tag "lead[phone]", @lead.phone, :class => "fields_blk", :size => 25, :minlength => 10, :maxlength => 15, :required => "true", :requiredmessage => "Please enter your Phone", :niceName => "Phone", :onKeyPress => "return phoneonly(this, event)" %>
+                          </div></td>
+                      </tr>
+                      <tr>
+                        <td class="main_wht"><div align="right"><%= image_tag "title_email.gif", :width => 33, :height => 11 %></div></td>
+                        <td><div align="left">
+                        	<%= text_field_tag "lead[email]", @lead.email, :class => "fields_blk", :size => 25, :required => "true", :requiredmessage => "Please enter your email address in the format your@email.com", :validateas => "email", :niceName => "Email" %>
+                        </div></td>
+                      </tr>
+                      <tr>
+                        <td class="main_wht"><div align="right"><%= image_tag "title_zipcode.gif", :width => 50, :height => 11 %></div></td>
+                        <td>
+                          <div align="left">
+                            <%= text_field_tag "lead[postal_code]", @lead.postal_code, :class => "fields_blk", :size => 25, :minlength => 5, :maxlength => 5, :required => "true", :requiredmessage => "Please enter your Zip Code", :niceName => "Zip Code", :onKeyPress => "return numbersonly(this, event)" %>
+                          </div></td>
+                      </tr>
+
+                      <tr>
+                        <td colspan="2">
+                          
+                          <div align="left">
+                          	<%# collection_select :lead, :category_id, @categories, :id, :name, {:prompt => true}, :class => "fields_blk", :required => "true" ,:requiredmessage => "Please select a Category", :niceName => "Category" %>
+                            <select name="lead[category_id]" class="fields_blk" id="category_id" required="true" requiredmessage="Please select a Category" niceName="Category">                            	
+                              <option value="">Select Category</option>
+							  <% @categories.each do |category| %>
+							  <option value="<%= category.id %>" <%= @lead.category_id == category.id ? 'selected' : '' %>><%= category.name %></option>
+							  <% end %>
+                            </select>
+							<%# observe_field "category_id", :url => {:action => 'project_types'}, :update => "project_type_select", :before => "$('indicator').toggle()", :with => "'category_id=' + value" %>
+                            </div></td>
+                      </tr>
+					  <tr>
+                        <td colspan="2">
+                          <div id="project_type_select" align="left">
+                          	<% if @project_types %>
+							<%= render :partial => 'project_types' %>
+							<% end %>
+					  		<span id="indicator" style="display: none"><%= image_tag 'indicator.gif' %></span>
+                          </div>
+						  
+						</td>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td><div align="left">
+                          <%= image_submit_tag "btn_match_me.jpg", :id => "imageField", :alt => "Match me NOW!" %>
+
+                        </div></td>
+                      </tr>
+                    </table>
+                                    </form>     
+									
