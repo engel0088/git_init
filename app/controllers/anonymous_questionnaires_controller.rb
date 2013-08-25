@@ -1,0 +1,2 @@
+class AnonymousQuestionnairesController < ApplicationController
+end
