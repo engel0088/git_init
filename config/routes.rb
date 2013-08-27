@@ -1,7 +1,17 @@
 Hiex::Application.routes.draw do
 
-  resources :public
   root :to => 'public#index'
+  match 'test1' => 'public#index', :as => :sign_up #[REMOVEIT]
+  match 'test2' => 'public#index', :as => :login #[REMOVEIT]
+  match 'test3' => 'public#index', :as => :comatose_root #[REMOVEIT]
+
+  resources :public do
+    collection do
+      get 'resources'
+      get 'browse'
+      get 'contact'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,25 @@
+<!-- 
+    Document   : upload_form
+    Created on : 12-May-2008, 11:22:28 AM
+    Author     : js
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Upload Image</title>
+    <script language="javascript" type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	
+  </head>
+  <body>
+      <form action="/newsletter_attachments/create" 
+      enctype="multipart/form-data" id="binary-edit-form" 
+      method="post">
+    <p><label for="newsletter_attachment_title">Title</label><br />
+          <input id="newsletter_attachment_title" name="newsletter_attachment[title]" type="text" />
+      </p>
+          <p><label for="newsletter_attachment_content">Upload a file:</label><br/>
+          <input id="newsletter_attachment_content_temp" name="newsletter_attachment[content_temp]" type="hidden" /><input id="newsletter_attachment_content" name="newsletter_attachment[content]" size="30" type="file" /></p>
+            <input type="submit" value="Upload!" />
+        </form>
+  </body>
+</html>

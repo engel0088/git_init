@@ -1,0 +1,86 @@
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+/**********************************************************************************/
+/*  Form 																																					*/
+/**********************************************************************************/
+div.form{*/
+/*width:80%;*/
+background:#77EFB4;
+}
+
+fieldset {
+border:medium none;
+margin:0pt;
+padding:0.5em 0.5em 0.5em 1.5em;
+}
+
+legend {
+font-size:100%;
+font-weight:normal;
+letter-spacing:0.05em;
+margin:0pt;
+padding:0.5em;
+text-transform:uppercase;
+}
+
+form div {
+margin:0.5em 0pt;
+position:relative;
+width:48em;
+}
+
+fieldset span.buttons{
+float:right;
+}
+
+div#add_group_campaign{
+text-align:left;
+}
+
+
+label, span.label {
+float:left;
+font-size:85%;
+margin:0.25em 0.5em 0.25em 0pt;
+text-align:right;
+vertical-align:middle;
+width:10em;
+}
+
+fieldset div input, select, textarea {
+border:3px double #AAAAAA;
+padding:0.1em;
+vertical-align:middle;
+}
+
+label em {
+color:#990000;
+float:left;
+font-style:italic;
+left:38em;
+margin:0.25em 0pt;
+position:absolute;
+text-align:left;
+top:0pt;
+width:20em;
+}
+
+
+div.form_group{
+border:3px double #AAAAAA;
+background:#ffb;
+width:600px;
+}
+
+.altTextField {
+width:21em;
+}
+
+.altTextArea {
+width:23.5em;
+}
+
+
+

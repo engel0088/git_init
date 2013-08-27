@@ -10,8 +10,9 @@ class PublicController < ApplicationController
     if request.post?
       if @lead.save
         #store_lead(@lead)
-        
-        redirect_to :action => 'category', :category_id => @lead.category_id, :lead_guid => @lead.guid, :conv => 1 # conv parameters is not used by the app, but only for google analytics purposes.
+        # conv parameters is not used by the app, but only for google analytics purposes.        
+        redirect_to :action => 'category', :category_id => @lead.category_id, :lead_guid => @lead.guid, :conv => 1 
+
         return
       end
     end

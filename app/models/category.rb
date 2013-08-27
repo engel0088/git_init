@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  include Paranoid
+
   # attr_accessible :title, :body
   acts_as_tree :order => "name"
 #  acts_as_breadcrumbs(:include_root)

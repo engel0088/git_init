@@ -1,4 +1,6 @@
 class Lead < ActiveRecord::Base
+  include Paranoid
+
   i_am_paranoid
   #belongs_to :project_type
   has_many :anonymous_questionnaires, :dependent => :destroy

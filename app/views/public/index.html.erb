@@ -46,7 +46,8 @@
                   <td height="49" class="search_bottom">&nbsp;</td>
                 </tr>
               </table>
-                <p align="center"><%= link_to image_tag("visit_resource_center.jpg", :alt => "Visit the HOME IMPROVEMENT RESOURCE CENTER!", :width => 138, :height => 121, :border => 0) , :controller => 'public', :action => 'resources' %></a><%= link_to image_tag("visit_licenced_contractors.jpg", :alt => "LICENCED CONTRACTORS can sign up HERE", :width => 127, :height => 121, :border => 0) , sign_up_url %></a></p></td>
+                <p align="center"><%= link_to image_tag("visit_resource_center.jpg", :alt => "Visit the HOME IMPROVEMENT RESOURCE CENTER!", :width => 138, :height => 121, :border => 0) , "public#resources" %></a>
+      <%= link_to image_tag("visit_licenced_contractors.jpg", :alt => "LICENCED CONTRACTORS can sign up HERE", :width => 127, :height => 121, :border => 0) , sign_up_url %></a></p></td>
             </tr>
           </table>            </td>
 
