@@ -9,6 +9,9 @@ Hiex::Application.routes.draw do
     collection do
       get 'resources'
       get 'browse'
+      get 'browse_form'
+      get 'results'
+
       get 'contact'
       get 'signup'
     end

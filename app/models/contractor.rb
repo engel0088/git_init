@@ -1,5 +1,5 @@
 class Contractor < ActiveRecord::Base
-  #include Paranoid
+  include Paranoid
   i_am_paranoid
   
   INSURANCE_EXPIRES_SOON_DAYS = 60
