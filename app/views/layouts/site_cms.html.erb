@@ -62,7 +62,10 @@
   </table>
   <br />
 </div>
-
 	
 <% end %>
-<%= render 'layouts/site', { 'content_for_layout' => @content_for_layout } %>
+
+
+<%= render :inline => @content_for_layout,:layout => 'layouts/site'  %>
+
+

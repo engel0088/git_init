@@ -144,13 +144,10 @@ class PublicController < ApplicationController
   end
   
   def contact
-    render :layout => 'site_cms'
-    
     if request.post?
       Notification.deliver_contact_form(params[:name], params[:company], params[:phone], params[:email], params[:comment])
-      
     end
-    
+    render :layout => 'site_cms'    
   end
   
   def signup

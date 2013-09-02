@@ -22,48 +22,57 @@
     <tr>
       <td>
       	
-		<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+	<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
         <tr>
-          <td width="352" valign="top"><table align="left" cellpadding="0" cellspacing="0">
+          <td width="352" valign="top">
+          <table align="left" cellpadding="0" cellspacing="0">
             <tr>
               <td width="34" height="463" class="search_bg">                </td>
-              <td valign="top"><table width="298" cellpadding="0" cellspacing="0">
+              <td valign="top">
+              
+               <table width="298" cellpadding="0" cellspacing="0">
                 <tr>
-
-                  <td height="131" class="magnify_bg"><div align="right" class="wht_header" id="magnify_glass">Get matched to a<br />
+                  <td height="131" class="magnify_bg">
+                    <div align="right" class="wht_header" id="magnify_glass">Get matched to a<br />
                     local pre-screened<br />
-                    <span class="wht_header_big">CONTRACTOR NOW!</span></div></td>
+                    <span class="wht_header_big">CONTRACTOR NOW!</span>
+                    </div>
+                  </td>
                 </tr>
+
                 <tr>
                   <td height="155" class="search_middle_bg">
-                  	
-					
-					<%= render :partial => "mini_form" %>
-                  	</td>
-
+  		    <%= render :partial => "mini_form" %>
+                  </td>
                 </tr>
+
                 <tr>
                   <td height="49" class="search_bottom">&nbsp;</td>
                 </tr>
               </table>
-                <p align="center"><%= link_to image_tag("visit_resource_center.jpg", :alt => "Visit the HOME IMPROVEMENT RESOURCE CENTER!", :width => 138, :height => 121, :border => 0) , "public#resources" %></a>
-      <%= link_to image_tag("visit_licenced_contractors.jpg", :alt => "LICENCED CONTRACTORS can sign up HERE", :width => 127, :height => 121, :border => 0) , sign_up_url %></a></p></td>
-            </tr>
-          </table>            </td>
+
+                <p align="center">
+                  <%= link_to image_tag("visit_resource_center.jpg", :alt => "Visit the HOME IMPROVEMENT RESOURCE CENTER!", :width => 138, :height => 121, :border => 0) , "public#resources" %>
+                  <%= link_to image_tag("visit_licenced_contractors.jpg", :alt => "LICENCED CONTRACTORS can sign up HERE", :width => 127, :height => 121, :border => 0) , sign_up_url %>
+                </p>
+            </td>
+          </tr>
+          </table>
+         </td>
 
           <td width="433" valign="top">
-        <% if @lead && @lead.errors.size > 0 %>  	
+            <% if @lead && @lead.errors.size > 0 %>  	
 		<div class="form_error_home">			
 		  <strong>The following errors occurred when processing the form:</strong><br /><br />
 		     <% @lead.errors.each do |attr, message| %>
-          	  &bull; Your <%= attr.humanize %> <%= message %><br />
-			 <% end %>
-        </div>
+             	       &bull; Your <%= attr.humanize %> <%= message %><br />
+		     <% end %>
+                </div>
 	    <% end %>
-		<table width="100%" cellpadding="0" cellspacing="0">
+	
+            <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
-              <td><%=  %>
-							&nbsp;</td>
+              <td><%=  %>&nbsp;</td>
               <td>&nbsp;</td>
             </tr>
             <tr>
