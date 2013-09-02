@@ -1,7 +1,7 @@
 Hiex::Application.routes.draw do
 
   root :to => 'public#index'
-  match 'test1' => 'public#index', :as => :sign_up #[REMOVEIT]
+  match 'signup' => 'public#signup', :as => :sign_up #[REMOVEIT]
   match 'test2' => 'public#index', :as => :login #[REMOVEIT]
   match 'test3' => 'public#index', :as => :comatose_root #[REMOVEIT]
 
@@ -10,6 +10,7 @@ Hiex::Application.routes.draw do
       get 'resources'
       get 'browse'
       get 'contact'
+      get 'signup'
     end
   end
 
