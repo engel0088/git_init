@@ -198,7 +198,7 @@ class PublicController < ApplicationController
         setup_js_tracking_code
       end
     end
-    flash[:error] = flash[:error].html_safe
+    flash[:error] = flash[:error].html_safe rescue ""
     render :layout => 'site_cms'
   end
 
