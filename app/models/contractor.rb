@@ -18,11 +18,12 @@ class Contractor < ActiveRecord::Base
   before_validation :copy_user_fields, :check_for_no_logo
   
   after_destroy :destroy_dependencies
-
+  # [TODO] file_column
+=begin
   file_column :logo , :magick => { 
     :versions => { "standard" => "120x500>" }
   }
-
+=end
 
   attr_accessor :password, :password_confirmation, :no_logo
 
