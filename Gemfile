@@ -21,6 +21,7 @@ end
 
 gem 'jquery-rails'
 gem 'acts_as_tree_rails3'
+gem 'aasm'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,4 +1,5 @@
 class Contractor < ActiveRecord::Base
+  include AASM
   include Paranoid
   i_am_paranoid
   
@@ -38,16 +39,20 @@ class Contractor < ActiveRecord::Base
     self.first_name + " " + self.last_name
   end
 
-  acts_as_state_machine :initial => :active, :column => 'status'
-  state :active, :enter => Proc.new {|c| c.user.activate! if c.user} # Make sure user authentication credentials also follow the Active/Suspended status
-  state :suspended, :enter => Proc.new {|c| c.user.suspend! if c.user}
+  # acts_as_state_machine evolve into AASM
+  aasm :column => 'status' do
+    state :active,:initial =>true, :enter => Proc.new {|c| c.user.activate! if c.user} 
+    # Make sure user authentication credentials also follow the Active/Suspended status
 
-  event :activate do
-    transitions :from => :suspended, :to => :active 
-  end
+    state :suspended, :enter => Proc.new {|c| c.user.suspend! if c.user}
+
+    event :activate do
+      transitions :from => :suspended, :to => :active 
+    end
   
-  event :suspend do
-    transitions :from => :active, :to => :suspended
+    event :suspend do
+      transitions :from => :active, :to => :suspended
+    end
   end
 
   def wished_monopolies(page = -1)
